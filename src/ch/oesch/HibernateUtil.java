@@ -13,15 +13,12 @@ import javax.persistence.Persistence;
  */
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
-    private static final EntityManagerFactory entityManagerFactory;
+    private static EntityManagerFactory entityManagerFactory = null;
     static {
         try {
             Configuration configuration=new Configuration();
             configuration.configure();
             sessionFactory = new Configuration().configure().buildSessionFactory();
-
-            // JPA
-            entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.tutorial.jpa");
 
         } catch (Exception e) {
             System.err.println("Initial SessionFactory creation failed." + e);
@@ -35,6 +32,14 @@ public class HibernateUtil {
 
     // JPA
     public static EntityManagerFactory getEntityManagerFactory() {
+        if (entityManagerFactory ==  null) {
+            // JPA
+            try {
+                entityManagerFactory = Persistence.createEntityManagerFactory("Sample");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return entityManagerFactory;
     }
 }

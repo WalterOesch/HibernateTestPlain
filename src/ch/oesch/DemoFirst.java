@@ -15,6 +15,7 @@ public class DemoFirst {
 
         try {
             HibernateNative();
+            JpaHibernateImplementation();
         } catch (Exception e) {
             e.printStackTrace();
         }
